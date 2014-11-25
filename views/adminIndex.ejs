@@ -1,0 +1,36 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <!-- Styles -->
+
+    <!-- Libraries -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="backend/scripts/appBack.js"></script>
+    <script src="backend/scripts/services/webapi.js"></script>
+    <script src="backend/scripts/controllers/country.js"></script>
+    <script src="backend/scripts/controllers/region.js"></script>
+
+</head>
+
+<body ng-app="appback">
+
+    <div class="container" ng-view=""></div>
+
+</body>
+
+</html>

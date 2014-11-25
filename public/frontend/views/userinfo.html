@@ -1,0 +1,39 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<navbar></navbar>
+
+<div class="container-fluid">
+
+    <!-- user icon -->
+
+    <h3>{{user.name}}</h3>
+
+    <a href="{{user.accountPage}}">
+        <img ng-src="{{user.image}}"></img>
+        <p>twitter account</p>
+    </a>
+
+    <followbtn target="{{userId}}"></followbtn>
+
+    <!-- Product list which he/she voted -->
+    <!-- TODO : この条件のフィルタがないので
+    routeにproduct/votedみたいなのを用意する -->
+
+    <!-- Product list which he/she submitted -->
+    <h3>Submitted products</h3>
+    <productlist submitter="{{userId}}"></productlist>
+
+    <!-- Followers of him/her -->
+    <h3>Following</h3>
+    <followinfo followings="{{userId}}"></followinfo>
+
+    <!-- Users who he/she is following -->
+    <h3>Followed by</h3>
+    <followinfo followedby="{{userId}}"></followinfo>
+
+
+</div>

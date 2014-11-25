@@ -1,0 +1,53 @@
+<!--
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+-->
+<div>
+    <a href="/admin">back</a>
+    <div>
+        <h2>Country registration</h2>
+
+        <form action="/v1/countries?redirect=admin#/country"
+              method="post"
+              enctype="multipart/form-data" >
+
+            <p>Country name</p>
+            <input type="text" name="name" placeholder="e.g.) Japan" />
+
+            <p>Region</p>
+            <select name="region">
+                <option ng-repeat="r in regions" value={{r._id}}>
+                    {{r.name}}
+                </option>
+            </select>
+
+            <p>Flag</p>
+            <input type="file" name="flagImg" />
+
+            <BR><BR>
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+
+    <div>
+        <h2>Country list</h2>
+
+        <h2 ng-show="{{loadErrorMsg}}">
+            {{loadErrorMsg}}
+        </h2>
+
+        <button ng-click='update()'>Update order</button>
+        <button ng-click='undo()'>Undo</button>
+
+        <ul ui-sortable ng-model="countries">
+            <li ng-repeat="c in countries">
+                <p>{{c.order}}</p>
+                <p>{{c.name}}</p>
+                <p><img border="1" ng-src="{{c.flagImg}}"/></p>
+                <p>Region : {{c.regionName}}</p>
+                <button ng-click='delete($index)'>Delete</button>
+            </li>
+        </ul>
+    </div>
+
+</div>

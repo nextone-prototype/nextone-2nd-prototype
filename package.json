@@ -1,0 +1,37 @@
+{
+  "name": "nextone-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "basic-auth-connect": "^1.0.0",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "ejs": "~0.8.5",
+    "es6-promise": "^2.0.0",
+    "express": "~4.2.0",
+    "express-session": "^1.9.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-less": "^0.11.4",
+    "jquery": "^2.1.1",
+    "jshint-stylish": "^1.0.0",
+    "log4js": "^0.6.21",
+    "mongoose": "^3.8.17",
+    "morgan": "~1.0.0",
+    "multer": "^0.1.6",
+    "passport": "^0.2.1",
+    "passport-twitter": "^1.0.2",
+    "static-favicon": "~1.0.0"
+  },
+  "devDependencies": {
+    "supertest": "^0.14.0",
+    "should": "^4.0.4"
+  },
+  "author": "tsuyoyo <tsuyogoro@gmail.com>",
+  "license": "MIT"
+}

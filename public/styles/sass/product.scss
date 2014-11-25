@@ -1,0 +1,44 @@
+
+$productinfo-accent : #f0f8ff;
+
+.product-detail {
+
+    .name {
+        margin-top : 0px;
+        font-size: 25px;
+        font-weight: 200;
+        a {
+            margin-left: 3px;
+            color: #696969;
+        }
+    }
+
+    .description {
+        margin-left : 10px;
+    }
+
+    .capture {
+        border: 1px solid #fff;
+        margin : 10px;
+        cursor: pointer;
+    }
+
+    .submit-info {
+        p {
+            margin: 0px;
+        }
+        padding : 10px;
+        background-color : $productinfo-accent;
+        .date {
+            float : right;
+            margin-top: 6px;
+        }
+    }
+
+    .postcomment {
+        margin-top: 10px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+}

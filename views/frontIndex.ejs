@@ -1,0 +1,71 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <!-- Styles -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+
+    <link href="styles/css/style.css" rel="stylesheet"></link>
+    <link href="styles/css/productlist.css" rel="stylesheet"></link>
+    <link href="styles/css/productsdaily.css" rel="stylesheet"></link>
+    <link href="styles/css/product.css" rel="stylesheet"></link>
+    <link href="styles/css/navbar.css" rel="stylesheet"></link>
+    <link href="styles/css/avatorbtn.css" rel="stylesheet"></link>
+    <link href="styles/css/commentform.css" rel="stylesheet"></link>
+    <link href="styles/css/postform.css" rel="stylesheet"></link>
+    <link href="styles/css/commentlist.css" rel="stylesheet"></link>
+
+    <!-- Libraries -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="frontend/scripts/appFront.js"></script>
+
+    <script src="frontend/scripts/directives/productlist.js"></script>
+    <script src="frontend/scripts/directives/productsdaily.js"></script>
+    <script src="frontend/scripts/directives/avatorbtn.js"></script>
+    <script src="frontend/scripts/directives/postform.js"></script>
+    <script src="frontend/scripts/directives/votebtn.js"></script>
+    <script src="frontend/scripts/directives/commentform.js"></script>
+    <script src="frontend/scripts/directives/commentlist.js"></script>
+    <script src="frontend/scripts/directives/voteinfo.js"></script>
+    <script src="frontend/scripts/directives/usericon.js"></script>
+    <script src="frontend/scripts/directives/followbtn.js"></script>
+    <script src="frontend/scripts/directives/followinfo.js"></script>
+    <script src="frontend/scripts/directives/navbar.js"></script>
+
+    <script src="frontend/scripts/controllers/index.js"></script>
+    <script src="frontend/scripts/controllers/comment.js"></script>
+    <script src="frontend/scripts/controllers/product.js"></script>
+    <script src="frontend/scripts/controllers/userinfo.js"></script>
+    <script src="frontend/scripts/controllers/countryinfo.js"></script>
+
+    <script src="frontend/scripts/services/webapi.js"></script>
+    <script src="frontend/scripts/services/usersession.js"></script>
+    <script src="frontend/scripts/services/dateutils.js"></script>
+    <script src="frontend/scripts/services/countryutils.js"></script>
+    <script src="frontend/scripts/services/voteutils.js"></script>
+    <script src="frontend/scripts/services/userutils.js"></script>
+
+</head>
+
+<body ng-app="appfront">
+
+    <div class="container" ng-view=""></div>
+
+</body>
+
+</html>

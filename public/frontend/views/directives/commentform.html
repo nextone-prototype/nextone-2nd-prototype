@@ -1,0 +1,41 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<form method="post" name="commentpost"
+      ng-submit="submit()" >
+
+    <div class="commentform">
+
+        <textarea name="comment"
+                  class="form-control"
+                  rows="3"
+                  ng-model="comment"
+                  placeholder="Write your comment"
+                  ng-maxlength="140" />
+
+        <span ng-show="commentpost.comment.$error.maxlength">
+            Exceeds 140 characters
+        </span>
+
+        <div class="submit">
+            <input type="submit"
+                   id="submit"
+                   class="btn btn-default"
+                   value="Post comment" />
+
+            <span ng-show="comment.length"
+                  ng-hide="commentpost.comment.$error.maxlength">
+                {{comment.length}} / 140 characters
+            </span>
+        </div>
+    </div>
+
+    <BR>
+    <div>
+        <span>{{postErrMessage}}</span>
+    <div>
+
+</form>

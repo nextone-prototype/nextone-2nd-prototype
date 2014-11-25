@@ -1,0 +1,20 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<div>
+    <p ng-if="followings">following {{loaded.length}} users</p>
+
+    <p ng-if="followedby">followed by {{loaded.length}} users</p>
+
+    <ul>
+        <li ng-repeat="u in loaded">
+
+            <p>{{u.name}}</p>
+
+            <usericon size="40" user="{{u._id}}"></usericon>
+        </li>
+    </ul>
+</div>

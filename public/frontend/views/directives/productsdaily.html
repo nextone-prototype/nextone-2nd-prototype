@@ -1,0 +1,22 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<div class="container">
+    <div ng-repeat="date in loadedDate">
+
+        <span class="date">{{getDateString(date)}}</span>
+
+        <productlist isoDate="{{date}}"></productlist>
+
+    </div>
+
+    <div class="loadmore" ng-click="more()">
+        <span class="glyphicon glyphicon-plus"></span>
+            Click here to load more
+    </div>
+
+</div>
+

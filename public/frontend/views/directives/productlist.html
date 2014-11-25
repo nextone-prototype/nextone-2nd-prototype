@@ -1,0 +1,63 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<div class="productlist">
+
+    <ul ng-if="0 < products.length">
+
+        <div class="row">
+
+            <li class="oneitem col-md-4 col-sm-6 col-xs-12"
+                ng-repeat="p in products">
+
+                <div class="product">
+
+                    <div class="product-header">
+                        <!-- Button to vote -->
+                        <votebtn entry="{{p._id}}"></votebtn>
+
+                        <a class="link-to-detail ellipsis"
+                           href="/#/product/{{p._id}}">
+                            {{p.name}}
+                        </a>
+
+                        <usericon class="user"
+                                  user="{{p.submitter}}"
+                                  size="36"></usericon>
+                    </div>
+
+                    <div class="product-description">
+                        <p class="description">
+                            {{p.description}}
+                        </p>
+
+                        <p class="link ellipsis">
+                            <a href="{{p.link}}">{{p.link}}</a>
+                        </p>
+                    </div>
+
+                    <!-- Button to comment -->
+                    <div class="product-info">
+
+                        <span class="comment">
+                            Comments ({{p.commentNum}})
+                        </span>
+
+                        <span class="flag">
+                            <a href="/#/country/{{p.country}}">
+                                <img ng-src='{{countryUtils.flagUrl(p.country)}}'></img>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+            </li>
+        </div>
+    </ul>
+
+    <p ng-if="products.length == 0">No product was reported</p>
+
+</div>

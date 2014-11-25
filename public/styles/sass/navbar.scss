@@ -1,0 +1,17 @@
+
+.navbar {
+    margin-top: 10px;
+}
+
+.navbar-inverse-mine {
+    @extend .navbar-inverse !optional;
+    background-color: transparent;
+}
+
+.nextly-logo {
+    background-size: contain;
+    height: 42px;
+    width: 387px;
+    margin-top: -11px;
+    margin-left: -20px;
+}

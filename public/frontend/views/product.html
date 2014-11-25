@@ -1,0 +1,57 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<navbar></navbar>
+
+<!-- product info -->
+<div class="row product-detail">
+
+    <div class="col-md-6 col-sm-12">
+
+        <div class="info">
+
+            <h2 class="name">
+                <votebtn entry="{{productId}}"></votebtn>
+
+                <a href="{{product.link}}">{{product.name}}</a>
+            </h2>
+
+            <p class="description">{{product.description}}</p>
+
+            <a target="_blank" href="{{product.link}}">
+                <img class="capture img-responsive"
+                     src="http://capture.heartrails.com/400x300?{{product.link}}"
+                     alt=""></img>
+            </a>
+
+            <div class="submit-info">
+                Posted by
+                <usericon size="30"
+                          user="{{submitter._id}}"></usericon>
+                <a href="/#/user/{{submitter._id}}">
+                    {{submitter.name}}
+                </a>
+
+                <span class="date">
+                    {{formatDate(product.date)}}
+                </span>
+            </div>
+        </div>
+
+        <div class="postcomment">
+            <commentform product="{{productId}}"></commentform>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 feedback">
+
+        <voteinfo entry="{{productId}}"></voteinfo>
+
+        <commentlist product="{{productId}}"></commentlist>
+
+    </div>
+
+<div>

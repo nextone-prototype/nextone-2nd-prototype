@@ -1,0 +1,30 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<button ng-if="userSession && getVoteByUser()"
+        ng-click="cancelVote()"
+        class="btn btn-default btn-sm">
+    <span class="glyphicon glyphicon-thumbs-down"></span>
+    <BR>
+    <span class="votenum">{{votes.length}}</span>
+</button>
+
+<button ng-if="userSession && !getVoteByUser()"
+        ng-click="vote()"
+        class="btn btn-default btn-sm" >
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    <BR>
+    <span class="votenum">{{votes.length}}</span>
+</button>
+
+<button ng-if="!userSession"
+        onClick="location.href='/auth/twitter'"
+        class="btn btn-default btn-sm">
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    <BR>
+    <span class="votenum">{{votes.length}}</span>
+</button>
+

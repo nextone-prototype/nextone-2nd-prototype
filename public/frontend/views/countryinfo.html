@@ -1,0 +1,21 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<div class="container-fluid">
+
+    <navbar></navbar>
+
+    <h3>{{country.name}}</h3>
+
+    <!-- Product list which he/she voted -->
+    <img ng-src="{{country.flagImg}}"></img>
+
+    <!-- Product list which he/she submitted -->
+    <h3>Products from {{country.name}}</h3>
+
+    <productlist country="{{countryid}}"></productlist>
+
+</div>

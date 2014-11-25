@@ -1,0 +1,15 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<div ng-if="userSession && !isMySelf">
+    <button ng-if="!isFollowing" ng-click="follow()" >
+        Follow
+    </button>
+    <button ng-if="isFollowing" ng-click="unfollow()" >
+        Stop follow
+    </button>
+</div>
+

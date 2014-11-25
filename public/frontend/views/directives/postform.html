@@ -1,0 +1,85 @@
+<!--
+/**
+ * Copyright (c)
+ * 2014 Tsuyoyo. All Rights Reserved.
+ */
+-->
+<!-- memo : Angular rich text forms
+  http://pote.hatenadiary.jp/entry/2012/10/14/225702
+-->
+
+<form class="productpost"
+      method="post"
+      name="productpost"
+      ng-submit="submit()" >
+
+    <div class="item">
+        <h4>Product Name</h4>
+
+        <input type="text"
+               class="form-control"
+               width="60%"
+               name="name"
+               ng-model="name"
+               placeholder="Input product name"
+               ng-maxlength="50"
+               required />
+
+        <span ng-show="productpost.name.$error.maxlength">
+            Product name exceeds 50 characters
+        </span>
+
+    </div>
+
+    <div class="item">
+        <h4>Description</h4>
+
+        <textarea name="description"
+                  class="form-control"
+                  rows="3"
+                  ng-model="description"
+                  placeholder="Max 140 characters"
+                  ng-maxlength="140" />
+
+        <span ng-show="productpost.description.$error.maxlength">
+            Product description exceeds 140 characters
+        </span>
+
+        <span ng-hide="productpost.description.$error.maxlength">
+            {{description.length}} / 140 characters
+        </span>
+    </div>
+
+    <div class="item">
+        <h4>Link to the product site</h4>
+
+        <input type="url"
+               class="form-control"
+               name="link"
+               ng-model="link"
+               placeholder="Input link to product site"
+               required />
+
+        <span ng-show="productpost.link.$error.url">
+            It must be an URL
+        </span>
+    </div>
+
+    <div class="item">
+        <h4>From which country the product was out?</h4>
+
+        <select class="form-control"
+                ng-model="selectedCountry"
+                ng-options="c as c.name for c in countries" />
+    </div>
+
+    <div class="item">
+        <input type="submit"
+               id="submit"
+               class="btn btn-default"
+               value="Submit new product information" />
+
+        <span>{{postErrMessage}}</span>
+    <div>
+
+</form>
