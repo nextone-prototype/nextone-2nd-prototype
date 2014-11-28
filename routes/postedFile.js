@@ -7,10 +7,6 @@
 var fs = require('fs');
 var path = require('path');
 var logger = require('../utils/log').logger;
-var s3Uploader = require('./s3FileWriter');
-
-/*jshint -W079 */
-var Promise = require('es6-promise').Promise;
 
 function PostedFileHandler(storeFolder) {
 
@@ -79,22 +75,23 @@ function PostedFileHandler(storeFolder) {
             return null;
         }
 
-        return new Promise(function (resolve, reject) {
-            var uploadedPath = req.files[key].path;
-            var mimeType = req.files[key].mimetype;
+        var uploadedPath = req.files[key].path;
+        var mimeType = req.files[key].mimetype;
 
-            var fileName = makeFileName(mimeType);
+        makeSureStoreFolder();
 
-            s3Uploader.upload(uploadedPath, 'flags', fileName)
-            .then(function(data, err) {
+        var fileName = makeFileName(mimeType);
+        var dist = path.join(storeFolder, fileName);
 
-                if (!err) {
-                    resolve(data);
-                } else {
-                    reject(err);
-                }
-            });
-        });
+        try {
+            fs.renameSync(uploadedPath, dist);
+            logger.debug('Saved file to ' + dist);
+
+            return fileName;
+        } catch(err) {
+            logger.error('Failed to handle posted image : ' + err);
+            return null;
+        }
     };
 
 }
