@@ -6,118 +6,89 @@
 
 var logger = require('../../utils/log').logger;
 
+/*jshint -W079 */
+var Promise = require('es6-promise').Promise;
+
 module.exports = function(params) {
+
+    var checkUniqueFields = function (postedData, uniqueFieldComb, model) {
+
+        var doCheckUniqueFields = function (resolve, reject) {
+
+            if (uniqueFieldComb && uniqueFieldComb.length) {
+
+                var checkCombo = require('./crudBasePostCombCheck').checkCombo;
+
+                checkCombo(uniqueFieldComb, model, function(statusCode, err) {
+
+                    if (!err) {
+                        resolve(postedData);
+                    } else {
+                        reject(statusCode, err);
+                    }
+                });
+
+            } else {
+
+                resolve(postedData);
+            }
+        };
+
+        return new Promise(doCheckUniqueFields);
+    };
 
     return function (req, res) {
 
         var Model = params.model;
 
-        var newData = new Model(req.body);
-
-        var postFileParams = params.postFileParams;
-
-        var postFolderName = params.postFolderName;
-
+        // ../ is to go up for api version.
         if (req.query.redirect) {
-            // ../ is to go up for api version.
             res.redirect('../' + req.query.redirect);
         }
 
-        // Save posted files and fill those file path into newData
-        if (postFileParams && 0 < postFileParams.length) {
+        var fileKeys = params.postFileParams;
+        var folder = params.postFolderName;
+        var handleFileFileds = require('./crudBasePostFileHandler').handleFileFields;
 
-            var PostedFileHandler = require('../postedFile');
+        // Model is passed through promises as 'data' param
+        handleFileFileds(
+            req, new Model(req.body), fileKeys, folder)
+        // Check if duplicated entry is registerd
+        .then(function(data) {
 
-            var path = require('path');
-            var fileHandler = new PostedFileHandler(
-                path.join(__dirname, '../../public/' + postFolderName));
+            var uniqueFieldComb = params.uniqueFieldComb;
+            return checkUniqueFields(data, uniqueFieldComb, Model);
+        })
+        // At the last, save the new data
+        .then(function (data) {
 
-            for (var i = 0; i<postFileParams.length; i++) {
-
-                logger.debug(req.files[postFileParams[i]]);
-
-                if (!fileHandler.isSupported(req, postFileParams[i])) {
-                    res.send(400, 'Unsupported file type : ' + postFileParams[i]);
-                    return;
-                }
-
-                // Save the file and add the file path into new data
-                var fileName = fileHandler.savePostedFile(req, postFileParams[i]);
-
-                if (fileName) {
-                    newData[postFileParams[i]] = path.join(postFolderName, fileName);
-                } else {
-                    res.send(500, 'Failed to post file : ' + postFileParams[i]);
-                    return;
-                }
-            }
-        }
-
-        // Save it into database
-        var doSave = function() {
-            newData.save(function (err, data) {
-
+            var onSaved = function (err) {
                 if (err) {
-                    logger.error('failed to save : ' + err);
                     res.send(500, err);
                 } else {
                     res.send(200, data);
                 }
-            });
-        };
-
-        var save = function () {
+            };
 
             // When it requires to assign array index
             if (params.assignOrder) {
-
                 Model.findOne().sort('-order').exec(function(err, item) {
-
                     if (!item) {
-                        newData.order = 0;
+                        data.order = 0;
                     } else {
-                        newData.order = item.order + 1;
+                        data.order = item.order + 1;
                     }
-                    doSave();
+                    data.save(onSaved);
                 });
-
             } else {
-
-                console.log('assignOrder is false');
-                doSave();
+                data.save(onSaved);
             }
-        };
+        })
+        // Error happens in promise execution
+        .catch(function(statusCode, err) {
+            logger.error('Error happened in crudBasePost : ' + statusCode + ' - ' + err);
+            res.send(statusCode, err);
+        });
 
-        // Note : So far, this is only for vote.
-        // メモ : 関数の引数でこういう関数をもらって、
-        // saveの処理がnextみたいな形式にしてみる
-        if (params.uniqueFieldComb && params.uniqueFieldComb.length) {
-
-            var query = Model.find();
-            params.uniqueFieldComb.forEach(function (field) {
-
-                query.where(field).equals(newData[field]);
-            });
-
-            query.exec(function (err, data) {
-
-                if (err) {
-
-                    logger.error('failed to check unique combo : ' + err);
-                    res.send(500, err);
-                } else {
-
-                    if (data && 0 < data.length) {
-                        res.send(400, 'Cannot register duplicated date');
-                    } else {
-                        save();
-                    }
-                }
-            });
-
-        } else {
-
-            save();
-        }
     };
 };

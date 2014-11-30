@@ -8,15 +8,22 @@ var fs = require('fs');
 var path = require('path');
 var logger = require('../utils/log').logger;
 
-function PostedFileHandler(storeFolder) {
+/*jshint -W079 */
+var Promise = require('es6-promise').Promise;
 
-    function makeSureStoreFolder() {
+/**
+ * It handles file information from request instance.
+ *
+ */
+module.exports.PostedFileHandler = function () {
+
+    function makeSureFolder(folder) {
 
         try {
-            fs.statSync(storeFolder);
+            fs.statSync(folder);
         } catch (e) {
             logger.error(e);
-            fs.mkdirSync(storeFolder, '0774');
+            fs.mkdirSync(folder, '0774');
         }
     }
 
@@ -31,7 +38,9 @@ function PostedFileHandler(storeFolder) {
         else if (mimeType === 'image/png') {
             return '.png';
         }
+
         logger.warn('Unsupported type : ' + mimeType);
+
         return null;
     }
 
@@ -43,14 +52,8 @@ function PostedFileHandler(storeFolder) {
         return createdDate + getExtension(mimeType);
     }
 
-    /**
-     * Check if the file is supported or not.
-     *
-     * @param req Request objet of http
-     * @param key Field name of req.files
-     * @return true when it's supported
-     */
-    this.isSupported = function(req, key) {
+    // Check if the file is supported or not.
+    function isSupported (req, key) {
 
         var mimeType = req.files[key].mimetype;
 
@@ -60,41 +63,42 @@ function PostedFileHandler(storeFolder) {
             logger.warn('Unsuppoted file is posted');
             return false;
         }
-    };
+    }
 
     /**
-     * Save posted image to public folder.
+     * Returns promise instance to execute save file in request.
      *
-     * @param req Request objet of http
-     * @param key Field name of req.files
-     * @return File name (not path), null when error happens
+     * The file is pulled from request and saved into distFolder.
+     *
      */
-    this.savePostedFile = function(req, key) {
-
-        if (!this.isSupported(req, key)) {
-            return null;
-        }
+    this.saveToStorage = function(req, key, distFolder) {
 
         var uploadedPath = req.files[key].path;
+
         var mimeType = req.files[key].mimetype;
 
-        makeSureStoreFolder();
+        return new Promise(function (resolve, reject) {
 
-        var fileName = makeFileName(mimeType);
-        var dist = path.join(storeFolder, fileName);
+            if (!isSupported(req, key)) {
+                reject(400, 'Unsupported file type : ' + key);
+                return;
+            }
 
-        try {
-            fs.renameSync(uploadedPath, dist);
-            logger.debug('Saved file to ' + dist);
+            makeSureFolder(distFolder);
 
-            return fileName;
-        } catch(err) {
-            logger.error('Failed to handle posted image : ' + err);
-            return null;
-        }
+            var fileName = makeFileName(mimeType);
+            var dist = path.join(distFolder, fileName);
+
+            // When save is success, it returns fileName
+            fs.rename(uploadedPath, dist, function (err) {
+                if (!err) {
+                    // dist is full path where the file is saved,
+                    // fileName is just file name careted in this method
+                    resolve({ fullPath : dist, fileName : fileName });
+                } else {
+                    reject(500, 'Failed to handle posted image : ' + err);
+                }
+            });
+        });
     };
-
-}
-
-module.exports = PostedFileHandler;
-
+};
