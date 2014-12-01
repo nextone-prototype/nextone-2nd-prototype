@@ -5,8 +5,7 @@
 'use strict';
 
 var logger = require('../../utils/log').logger;
-
-var PostedFileHandler = require('../postedFile').PostedFileHandler;
+var PostedFileHandler = require('./filesaverStorage').PostedFileHandler;
 
 /*jshint -W079 */
 var Promise = require('es6-promise').Promise;
@@ -33,7 +32,6 @@ module.exports.handleFileFields = function (req, postedData, keys, folder) {
         // Make Promise to execute save
         // and store file path in postedData[key]
         var makeSaveProcedure = function (key) {
-
             return new Promise(function (resolve, reject) {
 
                 // Node : Should update when storage is changed

@@ -2,13 +2,14 @@
  * Copyright (c)
  * 2014 Tsuyoyo. All Rights Reserved.
  */
+'use strict';
+
 var mongoose = require('mongoose');
 var fs = require('fs');
 var Schema = mongoose.Schema;
 var path = require('path');
 
 var Country = new Schema({
-
     name : String,
 
     flagImg : String,
@@ -16,7 +17,6 @@ var Country = new Schema({
     region : Schema.Types.ObjectId,
 
     order : Number
-
 });
 
 // When a country doc is removed,

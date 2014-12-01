@@ -20,9 +20,7 @@ var onGetToken = function(token, tokenSecret, profile, done) {
     query.limit(1);
 
     query.exec(function (err, users) {
-
         var addNewUser = function() {
-
             var newData = new User({
                 userId : profile.id,
                 accountPage : 'https://twitter.com/' + profile.username,

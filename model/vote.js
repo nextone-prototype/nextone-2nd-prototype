@@ -2,11 +2,12 @@
  * Copyright (c)
  * 2014 Tsuyoyo. All Rights Reserved.
  */
+'use strict';
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Vote = new Schema({
-
     entry : { type: Schema.Types.ObjectId },
 
     user : { type: Schema.Types.ObjectId },

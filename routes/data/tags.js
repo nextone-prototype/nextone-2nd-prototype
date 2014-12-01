@@ -5,7 +5,7 @@
 'use strict';
 
 var tag = require('../../model/tag');
-var base = require('./crudBase');
+var base = require('./crudbase');
 
 var params = {
 

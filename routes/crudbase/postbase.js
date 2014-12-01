@@ -11,32 +11,6 @@ var Promise = require('es6-promise').Promise;
 
 module.exports = function(params) {
 
-    var checkUniqueFields = function (postedData, uniqueFieldComb, model) {
-
-        var doCheckUniqueFields = function (resolve, reject) {
-
-            if (uniqueFieldComb && uniqueFieldComb.length) {
-
-                var checkCombo = require('./crudBasePostCombCheck').checkCombo;
-
-                checkCombo(uniqueFieldComb, model, function(statusCode, err) {
-
-                    if (!err) {
-                        resolve(postedData);
-                    } else {
-                        reject(statusCode, err);
-                    }
-                });
-
-            } else {
-
-                resolve(postedData);
-            }
-        };
-
-        return new Promise(doCheckUniqueFields);
-    };
-
     return function (req, res) {
 
         var Model = params.model;
@@ -48,20 +22,25 @@ module.exports = function(params) {
 
         var fileKeys = params.postFileParams;
         var folder = params.postFolderName;
-        var handleFileFileds = require('./crudBasePostFileHandler').handleFileFields;
+        var handleFileFileds = require('./postedfilehandler').handleFileFields;
 
         // Model is passed through promises as 'data' param
-        handleFileFileds(
-            req, new Model(req.body), fileKeys, folder)
-        // Check if duplicated entry is registerd
-        .then(function(data) {
+        handleFileFileds(req, new Model(req.body), fileKeys, folder)
 
-            var uniqueFieldComb = params.uniqueFieldComb;
-            return checkUniqueFields(data, uniqueFieldComb, Model);
+        // Check the posted data if needed
+        .then(function(data) {
+            if (params.checkPostedData) {
+                return params.checkPostedData(data, Model);
+            } else {
+                // Nothing to do when no check is needed
+                return new Promise(function(resolve) {
+                    resolve(data);
+                });
+            }
         })
+
         // At the last, save the new data
         .then(function (data) {
-
             var onSaved = function (err) {
                 if (err) {
                     res.send(500, err);
@@ -84,6 +63,7 @@ module.exports = function(params) {
                 data.save(onSaved);
             }
         })
+
         // Error happens in promise execution
         .catch(function(statusCode, err) {
             logger.error('Error happened in crudBasePost : ' + statusCode + ' - ' + err);

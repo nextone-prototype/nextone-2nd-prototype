@@ -5,7 +5,7 @@
 'use strict';
 
 var user = require('../../model/user');
-var base = require('./crudBase');
+var base = require('./crudbase');
 
 var params = {
 
