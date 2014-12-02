@@ -45,6 +45,7 @@ module.exports.handleFileFields = function (req, postedData, keys, folder) {
                 })
                 // Error happened in saving
                 .catch(function (status, err) {
+                    logger.error('Failed to save : ' + status + ' - ' + err);
                     reject(status, err);
                 });
             });

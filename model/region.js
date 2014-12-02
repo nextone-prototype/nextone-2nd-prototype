@@ -6,8 +6,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Country = require('./country').model();
-var removeDocs = require('modelUtils').removeDocs;
+
+var Country = mongoose.model('Country');
+
+var removeDocs = require('./modelUtils').removeDocs;
 var logger = require('../utils/log').logger;
 
 /*jshint -W079 */
@@ -23,6 +25,8 @@ Region.post('remove', function (doc) {
     removeDocs(Country, 'Country', { region : doc._id });
 });
 
+mongoose.model('Region', Region);
+
 module.exports.model = function () {
-    return mongoose.model('Region', Region);
+    return mongoose.model('Region');
 };

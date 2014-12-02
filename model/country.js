@@ -25,6 +25,8 @@ Country.post('remove', function (doc) {
     fs.unlinkSync(path.join(__dirname, '../public', doc.flagImg));
 });
 
-module.exports.model = function() {
-    return mongoose.model('Country', Country);
+mongoose.model('Country', Country);
+
+module.exports.model = function () {
+    return mongoose.model('Country');
 };

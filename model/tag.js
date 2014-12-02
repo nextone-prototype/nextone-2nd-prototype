@@ -11,6 +11,8 @@ var Tag = new Schema({
     name : String
 });
 
-module.exports.model = function() {
-    return mongoose.model('Tag', Tag);
+mongoose.model('Tag', Tag);
+
+module.exports.model = function () {
+    return mongoose.model('Tag');
 };

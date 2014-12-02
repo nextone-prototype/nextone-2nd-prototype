@@ -20,11 +20,9 @@ module.exports.connect = function() {
     logger.debug('DBUri : ' + dbUri);
 
     var connect = function () {
-
         var options = {
             server: { socketOptions: { keepAlive: 1 } }
         };
-
         connection = mongoose.connect(dbUri, options);
     };
 

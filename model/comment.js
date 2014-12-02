@@ -6,8 +6,8 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var removeDocs = require('modelUtils').removeDocs;
-var Vote = require('comment').model();
+var removeDocs = require('./modelUtils').removeDocs;
+var Vote = require('./vote').model();
 
 var Comment = new Schema({
     comment : { type: String, required: 'No comment body' },
@@ -23,7 +23,8 @@ Comment.post('remove', function (doc) {
     removeDocs(Vote, 'Vote', { entry : doc._id });
 });
 
-module.exports.model = function(){
-    return mongoose.model('Comment', Comment);
-};
+mongoose.model('Comment', Comment);
 
+module.exports.model = function () {
+    return mongoose.model('Comment');
+};

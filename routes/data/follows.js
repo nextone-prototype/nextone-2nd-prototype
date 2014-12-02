@@ -5,7 +5,7 @@
 'use strict';
 
 var follow = require('../../model/follow');
-var base = require('./crudbase');
+var base = require('../crudbase/crudbase');
 
 var params = {
 

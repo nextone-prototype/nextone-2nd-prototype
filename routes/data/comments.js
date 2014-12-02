@@ -5,7 +5,7 @@
 'use strict';
 
 var comment = require('../../model/comment');
-var base = require('./crudbase');
+var base = require('../crudbase/crudbase');
 
 var params = {
 

@@ -5,7 +5,7 @@
 'use strict';
 
 var vote = require('../../model/vote');
-var base = require('./crudbase');
+var base = require('../crudbase/crudbase');
 var logger = require('../../utils/log').logger;
 
 /*jshint -W079 */

@@ -15,6 +15,8 @@ var Vote = new Schema({
     submitted : Date
 });
 
+mongoose.model('Vote', Vote);
+
 module.exports.model = function() {
-    return mongoose.model('Vote', Vote);
+    return mongoose.model('Vote');
 };

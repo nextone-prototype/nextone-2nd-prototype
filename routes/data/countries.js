@@ -5,7 +5,7 @@
 'use strict';
 
 var country = require('../../model/country');
-var base = require('./crudbase');
+var base = require('../crudbase/crudbase');
 
 var params = {
 

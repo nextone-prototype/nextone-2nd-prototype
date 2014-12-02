@@ -6,7 +6,8 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var removeDocs = require('modelUtils').removeDocs;
+var removeDocs = require('./modelUtils').removeDocs;
+
 var Vote = require('./vote').model();
 var Comment = require('./comment').model();
 var Follow = require('./follow').model();
@@ -33,6 +34,8 @@ User.post('remove', function (doc) {
     removeDocs(Follow, 'Follow', { followee : doc._id });
 });
 
-module.exports.model = function() {
-    return mongoose.model('User', User);
+mongoose.model('User', User);
+
+module.exports.model = function () {
+    return mongoose.model('User');
 };

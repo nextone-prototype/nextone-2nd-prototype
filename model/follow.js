@@ -17,6 +17,8 @@ var Follow = new Schema({
 
 });
 
-module.exports.model = function() {
-    return mongoose.model('Follow', Follow);
+mongoose.model('Follow', Follow);
+
+module.exports.model = function () {
+    return mongoose.model('Follow');
 };

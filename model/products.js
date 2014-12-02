@@ -6,9 +6,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var removeDocs = require('modelUtils').removeDocs;
-var Comment = require('comment').model();
-var Vote = require('vote').model();
+var removeDocs = require('./modelUtils').removeDocs;
+
+var Comment = mongoose.model('Comment');
+var Vote = mongoose.model('Vote');
 
 var Product = new Schema({
 
@@ -32,7 +33,8 @@ Product.post('remove', function (doc) {
     removeDocs(Vote, 'Vote', { entry : doc._id });
 });
 
-module.exports.model = function() {
-    return mongoose.model('Product', Product);
-};
+mongoose.model('Product', Product);
 
+module.exports.model = function () {
+    return mongoose.model('Product');
+};

@@ -22,6 +22,7 @@ module.exports = function(params) {
 
         var fileKeys = params.postFileParams;
         var folder = params.postFolderName;
+
         var handleFileFileds = require('./postedfilehandler').handleFileFields;
 
         // Model is passed through promises as 'data' param
@@ -43,6 +44,7 @@ module.exports = function(params) {
         .then(function (data) {
             var onSaved = function (err) {
                 if (err) {
+                    logger.error('Failed to save in post : ' + err);
                     res.send(500, err);
                 } else {
                     res.send(200, data);

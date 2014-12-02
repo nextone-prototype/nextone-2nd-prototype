@@ -6,7 +6,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var logger = require('../utils/log').logger;
+var logger = require('../../utils/log').logger;
 
 /*jshint -W079 */
 var Promise = require('es6-promise').Promise;

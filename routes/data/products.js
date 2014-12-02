@@ -5,7 +5,7 @@
 'use strict';
 
 var product = require('../../model/products');
-var base = require('./crudbase');
+var base = require('../crudbase/crudbase');
 var logger = require('../../utils/log').logger;
 
 var params = {

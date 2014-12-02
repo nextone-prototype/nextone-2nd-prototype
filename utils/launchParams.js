@@ -22,29 +22,21 @@ module.exports.load = function(envParams) {
      * Database configs
      */
     params.db = {
-
         domain : value('DB_DOMAIN'),
-
         name : value('DB_NAME')
-
     };
 
     params.api = {
-
         version : value('API_VERSION')
     };
 
     params.adminAuth = {
-
         user : value('ADMIN_AUTH_USER'),
-
         password : value('ADMIN_AUTH_PASSWORD')
     };
 
     params.twitter = {
-
         consumer_key : value('TWITTER_CONSUMER_KEY'),
-
         consumer_secret : value('TWITTER_CONSUMER_SECRET')
     };
 
@@ -53,15 +45,10 @@ module.exports.load = function(envParams) {
     };
 
     params.aws = {
-
         accesskey : value('AWS_ACCESS_KEY_ID'),
-
         secretkey : value('AWS_SECRET_KEY'),
-
         s3 : {
-
             databucket : value('DATA_BUCKET_NAME'),
-
             region : value('S3_REGION')
         }
     };
