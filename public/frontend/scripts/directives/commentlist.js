@@ -11,6 +11,8 @@ angular.module('appfront')
 
         templateUrl: 'frontend/views/directives/commentlist.html',
 
+        require: '^ngModel',
+
         restrict: 'E',
 
         // attrs must have 'product' value

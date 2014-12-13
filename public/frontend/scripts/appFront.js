@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('appfront', ['ngResource', 'ngRoute', 'ngCookies', 'ui.bootstrap'])
-  .config(function($routeProvider) {
+  .config(function($routeProvider, $locationProvider) {
 
     $routeProvider
         .when('/', {

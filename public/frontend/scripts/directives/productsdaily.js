@@ -24,6 +24,12 @@ angular.module('appfront')
             // New date will be loaded when scroll() is called.
             scope.loadedDate = [];
 
+            scope.focusedProduct = null;
+
+            scope.onClickProduct = function(productId) {
+                scope.focusedProduct = productId;
+            };
+
             var scroll = function () {
 
                 for (var i=0; i<DAYS_TO_GET_ONE_SCROLL; i++) {

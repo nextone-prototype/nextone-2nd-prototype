@@ -27,8 +27,9 @@ angular.module('appfront')
                         var deferred = $q.defer();
 
                         UserUtils.getUserById(vote.user).then(function(user) {
-
-                            vote.userIcon = user.image;
+                            if (user) {
+                                vote.userIcon = user.image;
+                            }
                             deferred.resolve();
                         });
 

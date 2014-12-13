@@ -7,18 +7,18 @@
 <div class="productlist">
 
     <ul ng-if="0 < products.length">
-
         <div class="row">
-
-            <li class="oneitem col-md-4 col-sm-6 col-xs-12"
+            <li class="oneitem col-md-6 col-sm-6 col-xs-12"
                 ng-repeat="p in products">
-
                 <div class="product">
-
                     <div class="product-header">
                         <!-- Button to vote -->
                         <votebtn entry="{{p._id}}"></votebtn>
 
+<!--
+                        <p class="link-to-detail ellipsis"
+                           ng-click="onClickProduct(p._id)">{{p.name}}<p>
+-->
                         <a class="link-to-detail ellipsis"
                            href="/#/product/{{p._id}}">
                             {{p.name}}
@@ -52,8 +52,8 @@
                             </a>
                         </span>
                     </div>
-                </div>
 
+                </div>
             </li>
         </div>
     </ul>
